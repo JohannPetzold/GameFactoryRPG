@@ -7,5 +7,10 @@
 
 import Foundation
 
-print("Hello, World!")
+var gameManager = GameManager()
 
+gameManager.startGame()
+gameManager.chooseCharacters()
+gameManager.getPlayerTurn()
+gameManager.gameLoop()
+gameManager.endGameStats()
