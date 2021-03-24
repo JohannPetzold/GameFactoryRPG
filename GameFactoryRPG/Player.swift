@@ -1,7 +1,7 @@
 // La classe Player gère les actions liées à chaque joueur
 class Player {
     //MARK: Propriétés
-    var team: [Champion] = []
+    var heroes: [Hero] = []
     var alliesAlive: Int = 0
     var totalTurn: Int = 0
     
@@ -22,7 +22,7 @@ class Player {
                 name = readLine()
                 // Si name existe, qu'il est différent d'une string vide et qu'il n'est pas déjà existant dans listName
                 if name != nil && !listName.contains(name!) && name != "" {
-                    team.append(Champion(name: name!, number: x))
+                    heroes.append(Hero(name: name!, number: x))
                     alliesAlive += 1
                     listName.append(name!)
                     isValid = true
@@ -45,12 +45,12 @@ class Player {
         // Affichage des Champions
         for x in 0...2 {
             // Si le Champion est mort
-            if team[x].hp <= 0 {
+            if heroes[x].hp <= 0 {
                 print("❌) ", terminator: "")
             } else {
                 print("\(x + 1)) ", terminator: "")
             }
-            team[x].displayChampion(onStart: false)
+            heroes[x].displayChampion(onStart: false)
         }
         print("Votre choix (entre 1 et 3)...")
         while !isValid {
@@ -59,7 +59,7 @@ class Player {
                 // Si la valeur est un chiffre entre 1 et 3
                 if choice > 0 && choice < 4 {
                     // Vérifie si le Champion est mort
-                    if team[choice - 1].hp <= 0 {
+                    if heroes[choice - 1].hp <= 0 {
                         print("❌ Le champion est mort ❌")
                     // S'il est en vie, retourne le choix - 1 pour avoir l'index
                     } else {
@@ -109,14 +109,14 @@ class Player {
             // Affichage des ennemis
             for x in 0...2 {
                 // Si le Champion est mort
-                if ennemy.team[x].hp <= 0 {
+                if ennemy.heroes[x].hp <= 0 {
                     print("❌) ", terminator: "")
                 // Sinon ajoute la valeur à arrayChoice
                 } else {
                     print("\(x + 1)) ", terminator: "")
                     arrayChoice.append(x + 1)
                 }
-                ennemy.team[x].displayChampion(onStart: false)
+                ennemy.heroes[x].displayChampion(onStart: false)
             }
         // Si l'action est soigner
         } else if action == 2 {
@@ -124,14 +124,14 @@ class Player {
             // Affichage des alliés
             for x in 0...2 {
                 // Si le Champion est mort
-                if team[x].hp <= 0 {
+                if heroes[x].hp <= 0 {
                     print("❌) ", terminator: "")
                 // Sinon ajoute la valeur à arrayChoice
                 } else {
                     print("\(x + 1)) ", terminator: "")
                     arrayChoice.append(x + 1)
                 }
-                team[x].displayChampion(onStart: false)
+                heroes[x].displayChampion(onStart: false)
             }
         }
         print("Votre choix...")
@@ -162,7 +162,7 @@ class Player {
     func checkTeamAlive() {
         var count = 0
         for x in 0...2 {
-            if team[x].hp > 0 {
+            if heroes[x].hp > 0 {
                 count += 1
             }
         }

@@ -1,6 +1,6 @@
 import Foundation
 
-class Champion {
+class Hero {
     //MARK: Propriétés
     var name: String
     var hp: Int

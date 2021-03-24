@@ -43,9 +43,9 @@ class GameManager {
     
     // Stock les noms pour éviter les doublons
     func getTeamNames(_ player: Player) {
-        if player.team.count == 3 {
+        if player.heroes.count == 3 {
             for x in 0...2 {
-                allNames.append(player.team[x].name)
+                allNames.append(player.heroes[x].name)
             }
         }
     }
@@ -74,7 +74,7 @@ class GameManager {
                 // Si le joueur décide de prendre la nouvelle arme
                 if chest.chestAppear() {
                     // Modification de son arme actuelle
-                    players[playerTurn].team[champ].swapWeapon(newWeapon: chest.weapon)
+                    players[playerTurn].heroes[champ].swapWeapon(newWeapon: chest.weapon)
                 }
             }
             // Choix de l'action
@@ -106,13 +106,13 @@ class GameManager {
         // Affichage des statistiques des Champions du joueur gagnant
         print("Joueur \(playerTurn + 1)")
         for x in 0...2 {
-            players[playerTurn].team[x].displayChampionAtEnd()
+            players[playerTurn].heroes[x].displayChampionAtEnd()
         }
         Thread.sleep(forTimeInterval: 1)
         // Affichage des statistiques des Champions du joueur perdant
         print("\nJoueur \(((playerTurn + 1) % 2) + 1)")
         for x in 0...2 {
-            players[(playerTurn + 1) % 2].team[x].displayChampionAtEnd()
+            players[(playerTurn + 1) % 2].heroes[x].displayChampionAtEnd()
         }
         Thread.sleep(forTimeInterval: 1)
         print("\nMerci d'avoir joué !")
@@ -125,28 +125,28 @@ class GameManager {
         if actionChoice == 1 {
             // Définition de l'index ennemi
             let ennemy = (playerTurn + 1) % 2
-            print("\n⚔️  " + players[playerTurn].team[champ].name + " attaque " + players[ennemy].team[target].name + " ⚔️")
+            print("\n⚔️  " + players[playerTurn].heroes[champ].name + " attaque " + players[ennemy].heroes[target].name + " ⚔️")
             // Définition du montant des dégâts
-            let damage = players[playerTurn].team[champ].weapon.randomDamage()
+            let damage = players[playerTurn].heroes[champ].weapon.randomDamage()
             // Ajout des dégâts aux statistiques du Champion attaquant
-            players[playerTurn].team[champ].addTotalDamage(damage)
+            players[playerTurn].heroes[champ].addTotalDamage(damage)
             // Champion attaqué prend les dégâts
-            players[ennemy].team[target].getDamage(damage: damage)
+            players[ennemy].heroes[target].getDamage(damage: damage)
         // Si l'action est soigner
         } else if actionChoice == 2 {
             // Si le Champion s'est ciblé lui même
             if champ == target {
-                print("💊 " + players[playerTurn].team[champ].name + " se soigne 💊")
+                print("💊 " + players[playerTurn].heroes[champ].name + " se soigne 💊")
             // Sinon s'il a ciblé un allié
             } else {
-                print("💊 " + players[playerTurn].team[champ].name + " soigne " + players[playerTurn].team[target].name + " 💊")
+                print("💊 " + players[playerTurn].heroes[champ].name + " soigne " + players[playerTurn].heroes[target].name + " 💊")
             }
             // Définition du montant des soins
-            let heal = players[playerTurn].team[champ].weapon.randomHeal()
+            let heal = players[playerTurn].heroes[champ].weapon.randomHeal()
             // Ajout des soins aux statistiques du Champion soignant
-            players[playerTurn].team[champ].addTotalHeal(heal)
+            players[playerTurn].heroes[champ].addTotalHeal(heal)
             // Champion soigné
-            players[playerTurn].team[target].getHeal(heal: heal)
+            players[playerTurn].heroes[target].getHeal(heal: heal)
         }
     }
     
