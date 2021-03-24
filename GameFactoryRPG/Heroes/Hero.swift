@@ -4,32 +4,31 @@ class Hero {
     //MARK: Propriétés
     var name: String
     var hp: Int
-    var weapon: Weapon
-    var number: Int
+    var weapon: Weapon?
+    var job: Job?
     var totalDamage: Int
     var totalHeal: Int
     var totalDamageReceived: Int
     var totalHealReceived: Int
     
     //MARK: Init
-    init(name: String, number: Int) {
+    init(name: String) {
         self.name = name
         hp = 100
-        weapon = Weapon()
-        self.number = number
         totalDamage = 0
         totalHeal = 0
         totalDamageReceived = 0
         totalHealReceived = 0
-        displayChampion(onStart: true)
     }
     
     //MARK: Méthodes
     // Change les statistiques de l'armes par celles de la nouvelle
     func swapWeapon(newWeapon: Weapon) {
-        weapon.changeStats(newWeapon: newWeapon)
+        if weapon != nil {
+            weapon!.changeStats(newWeapon: newWeapon)
+        }
         print(name + " s'équipe de la nouvelle arme")
-        displayChampion(onStart: false)
+        displayChampion()
         Thread.sleep(forTimeInterval: 1)
     }
     
@@ -46,7 +45,7 @@ class Hero {
             print(name + " est mort ☠️")
             hp = 0
         }
-        displayChampion(onStart: false)
+        displayChampion()
         Thread.sleep(forTimeInterval: 1)
     }
     
@@ -62,7 +61,7 @@ class Hero {
         if hp > 100 {
             hp = 100
         }
-        displayChampion(onStart: false)
+        displayChampion()
         Thread.sleep(forTimeInterval: 1)
     }
     
@@ -77,26 +76,36 @@ class Hero {
     }
     
     // Affichage du Champion
-    func displayChampion(onStart: Bool) {
-        if onStart {
-            let rank = number == 1 ? "Premier" : number == 2 ? "Deuxième" : number == 3 ? "Troisième" : ""
-            print("***** " + rank + " Champion *****")
-        }
-        print(name + " | ", terminator: "")
+    func displayChampion() {
+        displayName()
         displayHp()
-        print(" | ⚔️  " + weapon.getDiceDamage(), terminator: "")
-        print(" - 💊 " + weapon.getDiceHeal())
+        if weapon != nil {
+            print(" | " + weapon!.weaponEmoji + " " + weapon!.getDiceDamage(), terminator: "")
+            print(" - 💊 " + weapon!.getDiceHeal())
+        }
     }
     
     // Affichage du Champion à la fin de la partie
     func displayChampionAtEnd() {
-        print(name + " | ", terminator: "")
-        print("⚔️  " + weapon.getDiceDamage(), terminator: "")
-        print(" - 💊 " + weapon.getDiceHeal())
-        print("⚔️  Infligés : \(totalDamage)", terminator: "")
-        print(" - Reçus : \(totalDamageReceived) ⚔️")
-        print("💊 Prodigués : \(totalHeal)", terminator: "")
-        print(" - Reçus : \(totalHealReceived) 💊")
+        displayName()
+        if weapon != nil {
+            print(weapon!.weaponEmoji + " " + weapon!.getDiceDamage(), terminator: "")
+            print(" - 💊 " + weapon!.getDiceHeal())
+            print("##### " + weapon!.weaponEmoji + " Dégâts " + weapon!.weaponEmoji + " #####")
+            print("Infligés : \(totalDamage)", terminator: "")
+            print(" - Reçus : \(totalDamageReceived)")
+            print("##### 💊 Soins 💊 #####")
+            print("Prodigués : \(totalHeal)", terminator: "")
+            print(" - Reçus : \(totalHealReceived)")
+        }
+    }
+    
+    func displayName() {
+        if job != nil {
+            print(name + " | " + job!.rawValue + " | ", terminator: "")
+        } else {
+            print(name + " | ", terminator: "")
+        }
     }
     
     // Affichage de la barre de vie
@@ -107,14 +116,23 @@ class Hero {
             while count < 100 {
                 count += 10
                 if count < hp + 10 {
-                    print("🟢", terminator: "")
+                    if hp < 20 {
+                        print("🔴", terminator: "")
+                    } else if hp < 40 {
+                        print("🟠", terminator: "")
+                    } else if hp < 60 {
+                        print("🟡", terminator: "")
+                    } else {
+                        print("🟢", terminator: "")
+                    }
+                    
                 } else {
-                    print(".", terminator: "")
+                    print("⚪️", terminator: "")
                 }
             }
         } else {
             while count <= 100 {
-                print("❌", terminator: "")
+                print("⚫️", terminator: "")
                 count += 10
             }
         }

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		400F4382260A4EE6006BD258 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F4381260A4EE6006BD258 /* main.swift */; };
+		4010E2EF260B78C80067722F /* Archer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010E2EE260B78C80067722F /* Archer.swift */; };
+		4010E2F2260B7C060067722F /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010E2F1260B7C060067722F /* Job.swift */; };
+		4010E2F5260B804B0067722F /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010E2F4260B804B0067722F /* WeaponType.swift */; };
+		4010E2F8260B82BA0067722F /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010E2F7260B82BA0067722F /* Warrior.swift */; };
+		4010E2FB260B82D20067722F /* Magician.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010E2FA260B82D20067722F /* Magician.swift */; };
 		40AD2046260A5F8700F6E019 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD2040260A5F8700F6E019 /* Player.swift */; };
 		40AD2047260A5F8700F6E019 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD2041260A5F8700F6E019 /* Chest.swift */; };
 		40AD2048260A5F8700F6E019 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD2042260A5F8700F6E019 /* Constants.swift */; };
@@ -31,6 +36,11 @@
 /* Begin PBXFileReference section */
 		400F437E260A4EE6006BD258 /* GameFactoryRPG */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameFactoryRPG; sourceTree = BUILT_PRODUCTS_DIR; };
 		400F4381260A4EE6006BD258 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		4010E2EE260B78C80067722F /* Archer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archer.swift; sourceTree = "<group>"; };
+		4010E2F1260B7C060067722F /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		4010E2F4260B804B0067722F /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
+		4010E2F7260B82BA0067722F /* Warrior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
+		4010E2FA260B82D20067722F /* Magician.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magician.swift; sourceTree = "<group>"; };
 		40AD2040260A5F8700F6E019 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		40AD2041260A5F8700F6E019 /* Chest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		40AD2042260A5F8700F6E019 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -70,14 +80,43 @@
 			isa = PBXGroup;
 			children = (
 				400F4381260A4EE6006BD258 /* main.swift */,
-				40AD2043260A5F8700F6E019 /* Hero.swift */,
-				40AD2041260A5F8700F6E019 /* Chest.swift */,
-				40AD2042260A5F8700F6E019 /* Constants.swift */,
 				40AD2045260A5F8700F6E019 /* GameManager.swift */,
 				40AD2040260A5F8700F6E019 /* Player.swift */,
+				40AD2041260A5F8700F6E019 /* Chest.swift */,
 				40AD2044260A5F8700F6E019 /* Weapon.swift */,
+				4010E2FE260B82F90067722F /* Heroes */,
+				4010E2FD260B82E90067722F /* Enum */,
+				4010E2FF260B83310067722F /* Utils */,
 			);
 			path = GameFactoryRPG;
+			sourceTree = "<group>";
+		};
+		4010E2FD260B82E90067722F /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				4010E2F1260B7C060067722F /* Job.swift */,
+				4010E2F4260B804B0067722F /* WeaponType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		4010E2FE260B82F90067722F /* Heroes */ = {
+			isa = PBXGroup;
+			children = (
+				40AD2043260A5F8700F6E019 /* Hero.swift */,
+				4010E2EE260B78C80067722F /* Archer.swift */,
+				4010E2F7260B82BA0067722F /* Warrior.swift */,
+				4010E2FA260B82D20067722F /* Magician.swift */,
+			);
+			path = Heroes;
+			sourceTree = "<group>";
+		};
+		4010E2FF260B83310067722F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				40AD2042260A5F8700F6E019 /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +178,13 @@
 			files = (
 				40AD2049260A5F8700F6E019 /* Hero.swift in Sources */,
 				40AD2047260A5F8700F6E019 /* Chest.swift in Sources */,
+				4010E2FB260B82D20067722F /* Magician.swift in Sources */,
+				4010E2F8260B82BA0067722F /* Warrior.swift in Sources */,
 				40AD2046260A5F8700F6E019 /* Player.swift in Sources */,
+				4010E2F5260B804B0067722F /* WeaponType.swift in Sources */,
 				40AD204B260A5F8700F6E019 /* GameManager.swift in Sources */,
+				4010E2F2260B7C060067722F /* Job.swift in Sources */,
+				4010E2EF260B78C80067722F /* Archer.swift in Sources */,
 				400F4382260A4EE6006BD258 /* main.swift in Sources */,
 				40AD2048260A5F8700F6E019 /* Constants.swift in Sources */,
 				40AD204A260A5F8700F6E019 /* Weapon.swift in Sources */,

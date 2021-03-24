@@ -5,8 +5,8 @@ class Chest {
     var weapon: Weapon
     
     //MARK: Init
-    init() {
-        weapon = Weapon()
+    init(job: Job) {
+        weapon = Weapon(job: job)
     }
     
     //MARK: Méthodes
@@ -21,7 +21,7 @@ class Chest {
         print("Il contient une arme !")
         Thread.sleep(forTimeInterval: 1)
         // Affichage des statistiques de l'arme
-        print("* Nouvelle arme : ⚔️  " + weapon.getDiceDamage() + " - 💊 " + weapon.getDiceHeal() + " *")
+        print("* Nouvelle arme : " + weapon.weaponEmoji + " " + weapon.getDiceDamage() + " - 💊 " + weapon.getDiceHeal() + " *")
         Thread.sleep(forTimeInterval: 1)
         print("Souhaitez-vous l'équiper ?")
         print("Oui(y) / Non(n)")

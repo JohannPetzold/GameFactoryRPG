@@ -6,14 +6,35 @@ class Weapon {
     var baseDamage: Int
     var diceHeal: Int
     var baseHeal: Int
+    var weaponType: WeaponType
+    var weaponEmoji: String
 
     //MARK: Init
-    init() {
+    init(job: Job) {
         // Définition des statistiques de base
-        dice = 3
-        baseDamage = 6
-        diceHeal = 3
-        baseHeal = 6
+        switch job {
+        case .archer:
+            dice = 2
+            baseDamage = 8
+            diceHeal = 2
+            baseHeal = 6
+            weaponType = .bow
+            weaponEmoji = "🏹"
+        case .magician:
+            dice = 4
+            baseDamage = 4
+            diceHeal = 4
+            baseHeal = 8
+            weaponType = .wand
+            weaponEmoji = "⚡️"
+        case .warrior:
+            dice = 3
+            baseDamage = 6
+            diceHeal = 3
+            baseHeal = 6
+            weaponType = .sword
+            weaponEmoji = "⚔️"
+        }
     }
     
     //MARK: Méthodes
@@ -22,7 +43,7 @@ class Weapon {
         dice = Int.random(in: 1...6)
         baseDamage = Int.random(in: 2...8) * 2
         diceHeal = Int.random(in: 1...6)
-        baseHeal = Int.random(in: 2...6) * 2
+        baseHeal = Int.random(in: 2...8) * 2
     }
     
     // Modifie les statistiques de l'arme par celles de la nouvelle
@@ -36,9 +57,7 @@ class Weapon {
     // Génère les dégâts de manière aléatoire en simulant un jet de dés
     func randomDamage() -> Int {
         let damage = dice * Int.random(in: 1...baseDamage)
-        print("🎲 \(dice)d\(baseDamage) : ", terminator: "")
-        Thread.sleep(forTimeInterval: 1)
-        print("\(damage) 🎲")
+        print("🎲 \(dice)d\(baseDamage) : \(damage) 🎲")
         Thread.sleep(forTimeInterval: 1)
         return damage
     }
@@ -46,9 +65,7 @@ class Weapon {
     // Génère les soins de manière aléatoire en simulant un jet de dés
     func randomHeal() -> Int {
         let heal = diceHeal * Int.random(in: 1...baseHeal)
-        print("🎲 \(diceHeal)d\(baseHeal) : ", terminator: "")
-        Thread.sleep(forTimeInterval: 1)
-        print("\(heal) 🎲")
+        print("🎲 \(diceHeal)d\(baseHeal) : \(heal) 🎲")
         Thread.sleep(forTimeInterval: 1)
         return heal
     }
