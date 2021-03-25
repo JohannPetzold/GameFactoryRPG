@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum WeaponType {
-    case bow
-    case sword
-    case wand
+enum WeaponType: String {
+    case bow = "Arc"
+    case sword = "Épée"
+    case wand = "Bâton"
 }

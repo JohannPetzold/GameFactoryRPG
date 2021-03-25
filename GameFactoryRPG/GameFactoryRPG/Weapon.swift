@@ -2,10 +2,10 @@ import Foundation
 
 class Weapon {
     //MARK: Propriétés
-    var dice: Int
-    var baseDamage: Int
-    var diceHeal: Int
-    var baseHeal: Int
+    private var dice: Int
+    private var baseDamage: Int
+    private var diceHeal: Int
+    private var baseHeal: Int
     var weaponType: WeaponType
     var weaponEmoji: String
 
@@ -37,13 +37,17 @@ class Weapon {
         }
     }
     
+    convenience init() {
+        self.init(job: .archer)
+    }
+    
     //MARK: Méthodes
     // Génère aléatoirement les dégâts et les soins de l'arme
     func randomStats() {
-        dice = Int.random(in: 1...6)
-        baseDamage = Int.random(in: 2...8) * 2
-        diceHeal = Int.random(in: 1...6)
-        baseHeal = Int.random(in: 2...8) * 2
+        dice = Int.random(in: MIN_DICE_DAMAGE...MAX_DICE_DAMAGE)
+        baseDamage = Int.random(in: MIN_DAMAGE...MAX_DAMAGE) * 2
+        diceHeal = Int.random(in: MIN_DICE_HEAL...MAX_DICE_HEAL)
+        baseHeal = Int.random(in: MIN_HEAL...MAX_HEAL) * 2
     }
     
     // Modifie les statistiques de l'arme par celles de la nouvelle
@@ -78,5 +82,13 @@ class Weapon {
     // Renvoi l'affichage du jet de dés en String
     func getDiceHeal() -> String {
         return "\(diceHeal)d\(baseHeal)"
+    }
+    
+    func displayTypeForChest() -> String {
+        switch weaponType {
+        case .bow: return "un " + weaponType.rawValue
+        case .sword: return "une " + weaponType.rawValue
+        case .wand: return "un " + weaponType.rawValue
+        }
     }
 }

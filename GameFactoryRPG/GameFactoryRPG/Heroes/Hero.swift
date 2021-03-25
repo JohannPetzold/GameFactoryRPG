@@ -14,7 +14,7 @@ class Hero {
     //MARK: Init
     init(name: String) {
         self.name = name
-        hp = 100
+        hp = HP_MAX
         totalDamage = 0
         totalHeal = 0
         totalDamageReceived = 0
@@ -28,7 +28,7 @@ class Hero {
             weapon!.changeStats(newWeapon: newWeapon)
         }
         print(name + " s'équipe de la nouvelle arme")
-        displayChampion()
+        displayHero()
         Thread.sleep(forTimeInterval: 1)
     }
     
@@ -45,7 +45,7 @@ class Hero {
             print(name + " est mort ☠️")
             hp = 0
         }
-        displayChampion()
+        displayHero()
         Thread.sleep(forTimeInterval: 1)
     }
     
@@ -58,10 +58,10 @@ class Hero {
         // Ajout des points de vie
         hp += heal
         // Si le montant augmente les points de vie au-dessus du montant maximum
-        if hp > 100 {
-            hp = 100
+        if hp > HP_MAX {
+            hp = HP_MAX
         }
-        displayChampion()
+        displayHero()
         Thread.sleep(forTimeInterval: 1)
     }
     
@@ -76,7 +76,7 @@ class Hero {
     }
     
     // Affichage du Champion
-    func displayChampion() {
+    func displayHero() {
         displayName()
         displayHp()
         if weapon != nil {
@@ -86,7 +86,7 @@ class Hero {
     }
     
     // Affichage du Champion à la fin de la partie
-    func displayChampionAtEnd() {
+    func displayHeroAtEnd() {
         displayName()
         if weapon != nil {
             print(weapon!.weaponEmoji + " " + weapon!.getDiceDamage(), terminator: "")
@@ -100,7 +100,7 @@ class Hero {
         }
     }
     
-    func displayName() {
+    private func displayName() {
         if job != nil {
             print(name + " | " + job!.rawValue + " | ", terminator: "")
         } else {
@@ -109,18 +109,18 @@ class Hero {
     }
     
     // Affichage de la barre de vie
-    func displayHp() {
+    private func displayHp() {
         var count = 0
-        print("\(hp)/100 [", terminator: "")
+        print("\(hp)/\(HP_MAX) [", terminator: "")
         if hp > 0 {
-            while count < 100 {
+            while count < HP_MAX {
                 count += 10
                 if count < hp + 10 {
-                    if hp < 20 {
+                    if hp <= HP_MAX.getPercentage(20) {
                         print("🔴", terminator: "")
-                    } else if hp < 40 {
+                    } else if hp <= HP_MAX.getPercentage(40) {
                         print("🟠", terminator: "")
-                    } else if hp < 60 {
+                    } else if hp <= HP_MAX.getPercentage(60) {
                         print("🟡", terminator: "")
                     } else {
                         print("🟢", terminator: "")
@@ -131,7 +131,7 @@ class Hero {
                 }
             }
         } else {
-            while count <= 100 {
+            while count <= HP_MAX {
                 print("⚫️", terminator: "")
                 count += 10
             }

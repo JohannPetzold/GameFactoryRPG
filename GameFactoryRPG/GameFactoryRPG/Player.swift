@@ -13,7 +13,7 @@ class Player {
         if allNames.count > 0 {
             listName = allNames
         }
-        for x in 1...3 {
+        for x in 1...HEROES_NUMBER {
             name = chooseName(x: x, listName: listName)
             chooseJob(name: name)
             alliesAlive += 1
@@ -21,17 +21,16 @@ class Player {
         }
     }
     
+    //MARK: Méthodes
     func chooseName(x: Int, listName: [String]) -> String {
         var name: String? = nil
         let isValid = false
-        let rank = x == 1 ? "premier" : x == 2 ? "deuxième" : x == 3 ? "troisième" : ""
-        print("\nChoisissez le nom du " + rank + " Héros :")
+        print("\nChoisissez le nom du Héros \(x) :")
         while !isValid {
             // Écoute ce que l'utilisateur entre
             name = readLine()
             // Si name existe, qu'il est différent d'une string vide et qu'il n'est pas déjà existant dans listName
             if name != nil && !listName.contains(name!) && name != "" {
-                print("\n***** " + rank.capitalized + " Champion *****")
                 return name!
             // Sinon si name est nil ou est vide
             } else if name == nil || name == "" {
@@ -49,7 +48,7 @@ class Player {
         print("1) Archer 🏹\n2) Guerrier ⚔️\n3) Magicien ⚡️")
         while !isValid {
             if let choice = Int(readLine()!) {
-                if choice > 0 && choice < 4 {
+                if choice > 0 && choice <= JOB_NUMBER {
                     if choice == 1 {
                         heroes.append(Archer(name: name))
                     } else if choice == 2 {
@@ -67,30 +66,29 @@ class Player {
         }
     }
     
-    //MARK: Méthodes
-    // Choix du Champion qui va effectuer l'action
-    func chooseChampForAction() -> Int {
+    // Choix du héros qui va effectuer l'action
+    func chooseHeroForAction() -> Int {
         var isValid = false
         print("----- Choisir le champion qui va effectuer l'action -----")
-        // Affichage des Champions
-        for x in 0...2 {
-            // Si le Champion est mort
+        // Affichage des héros
+        for x in 0...HEROES_NUMBER - 1  {
+            // Si le héros est mort
             if heroes[x].hp <= 0 {
                 print("☠️) ", terminator: "")
             } else {
                 print("\(x + 1)) ", terminator: "")
             }
-            heroes[x].displayChampion()
+            heroes[x].displayHero()
         }
-        print("Votre choix (entre 1 et 3)...")
+        print("Votre choix (entre 1 et \(HEROES_NUMBER))...")
         while !isValid {
             // Si la valeur entrée peut être convertie en Int
             if let choice = Int(readLine()!) {
-                // Si la valeur est un chiffre entre 1 et 3
-                if choice > 0 && choice < 4 {
-                    // Vérifie si le Champion est mort
+                // Si la valeur est un chiffre entre 1 et le nombre de héros max
+                if choice > 0 && choice <= HEROES_NUMBER {
+                    // Vérifie si le héros est mort
                     if heroes[choice - 1].hp <= 0 {
-                        print("❌ Le champion est mort ❌")
+                        print("❌ Le héros est mort ❌")
                     // S'il est en vie, retourne le choix - 1 pour avoir l'index
                     } else {
                         isValid = true
@@ -137,8 +135,8 @@ class Player {
         if action == 1 {
             print("Ennemis")
             // Affichage des ennemis
-            for x in 0...2 {
-                // Si le Champion est mort
+            for x in 0...HEROES_NUMBER - 1 {
+                // Si le héros est mort
                 if ennemy.heroes[x].hp <= 0 {
                     print("☠️) ", terminator: "")
                 // Sinon ajoute la valeur à arrayChoice
@@ -146,14 +144,14 @@ class Player {
                     print("\(x + 1)) ", terminator: "")
                     arrayChoice.append(x + 1)
                 }
-                ennemy.heroes[x].displayChampion()
+                ennemy.heroes[x].displayHero()
             }
         // Si l'action est soigner
         } else if action == 2 {
             print("Alliés")
             // Affichage des alliés
-            for x in 0...2 {
-                // Si le Champion est mort
+            for x in 0...HEROES_NUMBER - 1 {
+                // Si le héros est mort
                 if heroes[x].hp <= 0 {
                     print("☠️) ", terminator: "")
                 // Sinon ajoute la valeur à arrayChoice
@@ -161,7 +159,7 @@ class Player {
                     print("\(x + 1)) ", terminator: "")
                     arrayChoice.append(x + 1)
                 }
-                heroes[x].displayChampion()
+                heroes[x].displayHero()
             }
         }
         print("Votre choix...")
@@ -188,14 +186,20 @@ class Player {
         totalTurn += 1
     }
     
-    // Vérification du nombre de Champions en vies
+    // Vérification du nombre de héros en vies
     func checkTeamAlive() {
         var count = 0
-        for x in 0...2 {
+        for x in 0...HEROES_NUMBER - 1 {
             if heroes[x].hp > 0 {
                 count += 1
             }
         }
         alliesAlive = count
+    }
+    
+    func displayHeroesAtEnd() {
+        for x in 0...HEROES_NUMBER - 1 {
+            heroes[x].displayHeroAtEnd()
+        }
     }
 }

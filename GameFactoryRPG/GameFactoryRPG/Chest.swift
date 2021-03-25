@@ -18,7 +18,7 @@ class Chest {
         weapon.randomStats()
         print("🎁 Un coffre mystérieux apparait 🎁")
         Thread.sleep(forTimeInterval: 1)
-        print("Il contient une arme !")
+        print("Il contient une arme ! C'est " + weapon.displayTypeForChest() + " !")
         Thread.sleep(forTimeInterval: 1)
         // Affichage des statistiques de l'arme
         print("* Nouvelle arme : " + weapon.weaponEmoji + " " + weapon.getDiceDamage() + " - 💊 " + weapon.getDiceHeal() + " *")

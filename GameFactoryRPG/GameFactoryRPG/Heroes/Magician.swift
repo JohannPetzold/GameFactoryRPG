@@ -16,7 +16,7 @@ class Magician: Hero {
         super.init(name: name)
         job = .magician
         weapon = Weapon(job: job!)
-        displayChampion()
+        displayHero()
     }
     
     //MARK: Méthodes
