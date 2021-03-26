@@ -5,8 +5,8 @@ class Chest {
     var weapon: Weapon
     
     //MARK: Init
-    init(job: Job) {
-        weapon = Weapon(job: job)
+    init(weaponType: WeaponType) {
+        weapon = Weapon(weaponType: weaponType)
     }
     
     //MARK: Méthodes
@@ -15,12 +15,12 @@ class Chest {
         var isValid = false
         var answer: String? = nil
         // Définition aléatoire des statistiques de weapon
+        //TODO: Voir pour générer une arme aléatoire
         weapon.randomStats()
         print("🎁 Un coffre mystérieux apparait 🎁")
         Thread.sleep(forTimeInterval: 1)
-        print("Il contient une arme ! C'est " + weapon.displayTypeForChest() + " !")
+        print("Il contient une arme ! C'est " + weapon.weaponType.displayTypeForChest() + " !")
         Thread.sleep(forTimeInterval: 1)
-        // Affichage des statistiques de l'arme
         print("* Nouvelle arme : " + weapon.weaponEmoji + " " + weapon.getDiceDamage() + " - 💊 " + weapon.getDiceHeal() + " *")
         Thread.sleep(forTimeInterval: 1)
         print("Souhaitez-vous l'équiper ?")
@@ -29,7 +29,6 @@ class Chest {
             answer = readLine()
             if answer == "y" || answer == "n" {
                 isValid = true
-                // Retourne true si la valeur entrée correspond au choix positif
                 if answer == "y" {
                     return true
                 } else if answer == "n" {

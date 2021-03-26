@@ -6,10 +6,9 @@ let RATE_CHEST = 3
 
 // Player
 let HEROES_NUMBER = 3
-let JOB_NUMBER = 3
 
 // Hero
-let HP_MAX = 100
+let HP_MAX = 20
 
 // Weapon
 let MIN_DICE_DAMAGE = 1

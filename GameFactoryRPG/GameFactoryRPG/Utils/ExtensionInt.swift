@@ -10,7 +10,7 @@ import Foundation
 extension Int {
     func getPercentage(_ percentage: Int) -> Int {
         var result: Double = 0
-        result = (Double(self) * Double(percentage)) / Double(self)
+        result = (Double(self) * Double(percentage)) / Double(100)
         return Int(result)
     }
 }

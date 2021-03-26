@@ -4,8 +4,9 @@ class Hero {
     //MARK: Propriétés
     var name: String
     var hp: Int
-    var weapon: Weapon?
-    var job: Job?
+    // A modifier
+    var weapon: Weapon
+    var jobName: String
     var totalDamage: Int
     var totalHeal: Int
     var totalDamageReceived: Int
@@ -15,6 +16,8 @@ class Hero {
     init(name: String) {
         self.name = name
         hp = HP_MAX
+        weapon = Weapon()
+        jobName = ""
         totalDamage = 0
         totalHeal = 0
         totalDamageReceived = 0
@@ -24,9 +27,7 @@ class Hero {
     //MARK: Méthodes
     // Change les statistiques de l'armes par celles de la nouvelle
     func swapWeapon(newWeapon: Weapon) {
-        if weapon != nil {
-            weapon!.changeStats(newWeapon: newWeapon)
-        }
+        weapon.changeStats(newWeapon: newWeapon)
         print(name + " s'équipe de la nouvelle arme")
         displayHero()
         Thread.sleep(forTimeInterval: 1)
@@ -79,33 +80,22 @@ class Hero {
     func displayHero() {
         displayName()
         displayHp()
-        if weapon != nil {
-            print(" | " + weapon!.weaponEmoji + " " + weapon!.getDiceDamage(), terminator: "")
-            print(" - 💊 " + weapon!.getDiceHeal())
-        }
+        print(" | " + weapon.weaponEmoji + " " + weapon.getDiceDamage(), terminator: "")
+        print(" - 💊 " + weapon.getDiceHeal())
     }
     
     // Affichage du Champion à la fin de la partie
     func displayHeroAtEnd() {
         displayName()
-        if weapon != nil {
-            print(weapon!.weaponEmoji + " " + weapon!.getDiceDamage(), terminator: "")
-            print(" - 💊 " + weapon!.getDiceHeal())
-            print("##### " + weapon!.weaponEmoji + " Dégâts " + weapon!.weaponEmoji + " #####")
-            print("Infligés : \(totalDamage)", terminator: "")
-            print(" - Reçus : \(totalDamageReceived)")
-            print("##### 💊 Soins 💊 #####")
-            print("Prodigués : \(totalHeal)", terminator: "")
-            print(" - Reçus : \(totalHealReceived)")
-        }
+        print(weapon.weaponEmoji + " " + weapon.getDiceDamage(), terminator: "")
+        print(" - 💊 " + weapon.getDiceHeal())
+        print(weapon.weaponEmoji + " Dégâts " + weapon.weaponEmoji + " ", terminator: "")
+        print("Infligés : \(totalDamage) - Reçus : \(totalDamageReceived)")
+        print("💊 Soins 💊 Prodigués : \(totalHeal) - Reçus : \(totalHealReceived)")
     }
     
     private func displayName() {
-        if job != nil {
-            print(name + " | " + job!.rawValue + " | ", terminator: "")
-        } else {
-            print(name + " | ", terminator: "")
-        }
+        print(name + " | " + jobName + " | ", terminator: "")
     }
     
     // Affichage de la barre de vie
@@ -114,8 +104,8 @@ class Hero {
         print("\(hp)/\(HP_MAX) [", terminator: "")
         if hp > 0 {
             while count < HP_MAX {
-                count += 10
-                if count < hp + 10 {
+                count += HP_MAX / 10
+                if count < hp + (HP_MAX / 10) {
                     if hp <= HP_MAX.getPercentage(20) {
                         print("🔴", terminator: "")
                     } else if hp <= HP_MAX.getPercentage(40) {
@@ -125,7 +115,6 @@ class Hero {
                     } else {
                         print("🟢", terminator: "")
                     }
-                    
                 } else {
                     print("⚪️", terminator: "")
                 }
@@ -133,7 +122,7 @@ class Hero {
         } else {
             while count <= HP_MAX {
                 print("⚫️", terminator: "")
-                count += 10
+                count += (HP_MAX / 10)
             }
         }
         print("]", terminator: "")

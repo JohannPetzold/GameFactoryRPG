@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Job: String {
+enum Job: String, CaseIterable {
     case archer = "Archer"
     case warrior = "Guerrier"
     case magician = "Magicien"
