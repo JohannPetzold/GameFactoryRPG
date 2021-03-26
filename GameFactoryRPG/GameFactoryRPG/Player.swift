@@ -22,6 +22,7 @@ class Player {
     }
     
     //MARK: Méthodes
+    /* Choix du nom du héros et le renvoi en String */
     func chooseName(x: Int, listName: [String]) -> String {
         var name: String? = nil
         let isValid = false
@@ -38,12 +39,13 @@ class Player {
         }
     }
     
+    /* Choix de la classe du héros et ajoute le héros à l'array heroes */
     func chooseJob(name: String) {
         let isValid = false
         var read: String? = nil
         
         print("Choisissez la classe du Héros " + name + " :")
-        print("1) Archer 🏹\n2) Guerrier ⚔️\n3) Magicien ⚡️\n4) Nouvelle Classe")
+        print("1) Archer 🏹\n2) Guerrier ⚔️\n3) Magicien ⚡️\n4) Créer une classe")
         
         while !isValid {
             read = readLine()
@@ -67,10 +69,11 @@ class Player {
         }
     }
     
+    /* Affichage des héros, choix du héros, retourne l'index correspondant */
     func chooseHeroForAction() -> Int {
         var isValid = false
         var read: String? = nil
-        print("----- Choisir le champion qui va effectuer l'action -----")
+        print("----- Choisir le Héros qui va effectuer l'action -----")
         for x in 0...HEROES_NUMBER - 1  {
             if heroes[x].hp <= 0 {
                 print("☠️) ", terminator: "")
@@ -86,7 +89,7 @@ class Player {
                 if let choice = Int(read!) {
                     if choice > 0 && choice <= HEROES_NUMBER {
                         if heroes[choice - 1].hp <= 0 {
-                            print("❌ Le héros est mort ❌")
+                            print("❌ Le Héros est mort ❌")
                         } else {
                             isValid = true
                             return choice - 1
@@ -94,15 +97,16 @@ class Player {
                     }
                 }
             }
-            print("❌ Entrer un chiffre compris entre 1 et 3 ❌")
+            print("❌ Entrer un chiffre compris entre 1 et \(HEROES_NUMBER) ❌")
         }
     }
     
+    /* Choix de l'action, retourne 1 pour attaque et 2 pour soin */
     func chooseAction(hero: Int) -> Int {
         let isValid = false
         var read: String? = nil
         print("\n----- Choisir une action à effectuer -----")
-        print("1) " + heroes[hero].weapon.weaponEmoji + " Attaquer")
+        print("1) " + heroes[hero].weapon.weaponType.getWeaponEmoji() + " Attaquer")
         print("2) 💊 Soigner")
         print("Votre choix (1 ou 2)...")
         while !isValid {
@@ -118,22 +122,20 @@ class Player {
         }
     }
     
+    /* Affichage de la cible en fonction de l'action, choix du héros, retourne son index */
     func chooseTarget(champ: Int, action: Int, ennemy: Player) -> Int {
         let isValid = false
         var read: String? = nil
         var arrayChoice: [Int] = []
         print("\n----- Choisir votre cible -----")
-        // Attaque
         if action == 1 {
             print("Ennemis")
             arrayChoice = ennemy.displayHeroesTarget()
-        // Soin
         } else if action == 2 {
             print("Alliés")
             arrayChoice = displayHeroesTarget()
         }
         print("Votre choix...")
-        // Lecture de la ligne, transformation en Int, vérification, retour
         while !isValid {
             read = readLine()
             if read != nil {

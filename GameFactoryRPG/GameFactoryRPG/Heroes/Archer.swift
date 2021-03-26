@@ -19,7 +19,7 @@ class Archer: Hero {
     override init(name: String) {
         super.init(name: name)
         jobName = Job.archer.rawValue
-        weapon = Weapon(diceDamage: diceDamage, baseDamage: baseDamage, diceHeal: diceHeal, baseHeal: baseHeal, type: weaponType, emoji: weaponType.getWeaponEmoji())
+        weapon = Weapon(diceDamage: diceDamage, baseDamage: baseDamage, diceHeal: diceHeal, baseHeal: baseHeal, type: weaponType)
         displayHero()
     }
     

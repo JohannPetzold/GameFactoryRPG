@@ -96,6 +96,7 @@ class GameManager {
         print("Nombre de tours Joueur \(playerTurn + 1) : \(players[playerTurn].totalTurn)")
         Thread.sleep(forTimeInterval: 1)
         print("Nombre de tours Joueur \(ennemy + 1) : \(players[ennemy].totalTurn)\n")
+        Thread.sleep(forTimeInterval: 1)
 
         print("Joueur \(playerTurn + 1)")
         players[playerTurn].displayHeroesAtEnd()
@@ -123,7 +124,8 @@ class GameManager {
     private func resolveAction(hero: Int, actionChoice: Int, target: Int) {
         // Attaque
         if actionChoice == 1 {
-            print("\n" + players[playerTurn].heroes[hero].weapon.weaponEmoji + " " + players[playerTurn].heroes[hero].name + " attaque " + players[ennemy].heroes[target].name + " " + players[playerTurn].heroes[hero].weapon.weaponEmoji)
+            let emoji = players[playerTurn].heroes[hero].weapon.weaponType.getWeaponEmoji()
+            print("\n" + emoji + " " + players[playerTurn].heroes[hero].name + " attaque " + players[ennemy].heroes[target].name + " " + emoji)
             Thread.sleep(forTimeInterval: 1)
             
             let damage = players[playerTurn].heroes[hero].weapon.randomDamage()

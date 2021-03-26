@@ -22,11 +22,12 @@ class CustomJob: Hero {
         weaponType = customWeapon()
         customDamage()
         customHeal()
-        weapon = Weapon(diceDamage: diceDamage, baseDamage: baseDamage, diceHeal: diceHeal, baseHeal: baseHeal, type: weaponType, emoji: weaponType.getWeaponEmoji())
+        weapon = Weapon(diceDamage: diceDamage, baseDamage: baseDamage, diceHeal: diceHeal, baseHeal: baseHeal, type: weaponType)
         displayHero()
     }
     
     //MARK: Méthodes
+    /* Retourne le nom de la classe entrée par le joueur */
     private func customJobName() -> String {
         var name: String? = nil
         let isValid = false
@@ -40,6 +41,7 @@ class CustomJob: Hero {
         }
     }
     
+    /* Retourne le type d'arme choisie par le joueur parmi celles existantes */
     private func customWeapon() -> WeaponType {
         var read: String? = nil
         let isValid = false
@@ -62,6 +64,7 @@ class CustomJob: Hero {
         }
     }
     
+    /* Défini le nombre de dés de l'attaque de l'arme, et défini automatiquement les faces des dés */
     private func customDamage() {
         var read: String? = nil
         let isValid = false
@@ -82,6 +85,7 @@ class CustomJob: Hero {
         }
     }
     
+    /* Défini le nombre de dés de soins de l'arme, et défini automatiquement les faces des dés */
     private func customHeal() {
         var read: String? = nil
         let isValid = false
