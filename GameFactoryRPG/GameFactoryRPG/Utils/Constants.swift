@@ -2,13 +2,14 @@ import Foundation
 
 // Variables
 // Chest
+// La chance d'apparition est 1/RATE_CHEST
 let RATE_CHEST = 3
 
 // Player
 let HEROES_NUMBER = 3
 
 // Hero
-let HP_MAX = 20
+let HP_MAX = 100
 
 // Weapon
 let MIN_DICE_DAMAGE = 1
