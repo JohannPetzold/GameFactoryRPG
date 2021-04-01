@@ -122,7 +122,7 @@ class Hero {
                 }
             }
         } else {
-            while count <= HP_MAX {
+            while count < HP_MAX {
                 print("⚫️", terminator: "")
                 count += (HP_MAX / 10)
             }

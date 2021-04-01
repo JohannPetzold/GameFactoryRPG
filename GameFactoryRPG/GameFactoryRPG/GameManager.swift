@@ -159,4 +159,42 @@ class GameManager {
         }
         return true
     }
+    
+    /* Vérifie les constantes avant de lancer la partie pour éviter les erreurs */
+    func verifyConstants() -> Bool {
+        var launchGame = true
+        if RATE_CHEST < 2 {
+            print("La constate RATE_CHEST doit être supérieure à 1")
+            launchGame = false
+        }
+        if HEROES_NUMBER < 1 {
+            print("La constante HEROES_NUMBER doit être supérieure à 0 (valeur recommandée : 3)")
+            launchGame = false
+        }
+        if HP_MAX < 10 || HP_MAX % 10 != 0 {
+            print("La constante HP_MAX doit être à 10 minimum et doit être un multiple de 10 (valeur recommandée : 100)")
+            launchGame = false
+        }
+        if !verifyDice(min: MIN_DICE_DAMAGE, max: MAX_DICE_DAMAGE, minStr: "MIN_DICE_DAMAGE", maxStr: "MAX_DICE_DAMAGE") {
+            launchGame = false
+        }
+        if !verifyDice(min: MIN_DAMAGE, max: MAX_DAMAGE, minStr: "MIN_DAMAGE", maxStr: "MAX_DAMAGE") {
+            launchGame = false
+        }
+        if !verifyDice(min: MIN_DICE_HEAL, max: MAX_DICE_HEAL, minStr: "MIN_DICE_HEAL", maxStr: "MAX_DICE_HEAL") {
+            launchGame = false
+        }
+        if !verifyDice(min: MIN_HEAL, max: MAX_HEAL, minStr: "MIN_HEAL", maxStr: "MAX_HEAL") {
+            launchGame = false
+        }
+        return launchGame
+    }
+    
+    private func verifyDice(min: Int, max: Int, minStr: String, maxStr: String) -> Bool {
+        if min >= max || min < 1 || max < 2 {
+            print(minStr + " doit être supérieure à 0, " + maxStr + " doit être supérieure à 1 et " + minStr + " est forcément inférieure à " + maxStr)
+            return false
+        }
+        return true
+    }
 }

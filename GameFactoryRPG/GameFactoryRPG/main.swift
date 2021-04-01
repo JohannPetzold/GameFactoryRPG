@@ -10,7 +10,9 @@ import Foundation
 var gameManager = GameManager()
 
 gameManager.startGame()
-gameManager.chooseCharacters()
-gameManager.getPlayerTurn()
-gameManager.gameLoop()
-gameManager.endGameStats()
+if gameManager.verifyConstants() {
+    gameManager.chooseCharacters()
+    gameManager.getPlayerTurn()
+    gameManager.gameLoop()
+    gameManager.endGameStats()
+}
