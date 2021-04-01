@@ -1,5 +1,8 @@
 ##### README #####
 
+Lien vers le GitHub du projet :
+https://github.com/JohannPetzold/GameFactoryRPG
+
 2 solutions pour lancer le projet :
 - Dans Xcode avec le fichier .xcodeproj
 - Dans le terminal, utiliser la commande make à la racine du Makefile (./GameFactoryRPG/) puis lancer l'executable (./GameFactoryRPGExec)
